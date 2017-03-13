@@ -41,7 +41,7 @@ class NabtoManager: Any {
     private var lastUser: String?
     private var initialized = false
         
-    let nabto = { return Manager.sharedManager() as! Manager }()
+    let nabto = { return NabtoClient.instance() as! NabtoClient }()
     
     //MARK: - App state changes
     
