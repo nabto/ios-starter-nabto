@@ -8,7 +8,7 @@ version](https://github.com/nabto/ionic-starter-nabto) for more details on the a
 
 The app uses the NabtoClient Cocoapod, so to build and run, perform the following steps:
 
-1. Install dependencies: `$ pod install` (see https://www.cocoapods.org for info on install the pod tool)
+1. Install dependencies: `$ pod install` (see https://www.cocoapods.org for info on installation of the pod tool)
 
 2. Open the generated workspace in XCode and work from there: `open ios-starter-nabto.xcworkspace`
 
