@@ -35,14 +35,14 @@ class ProfileCreateViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func createProfile(_ sender: Any) {
-        guard let username = textField.text, username.characters.count > 2 else { return }
+        guard let username = textField.text, username.count > 2 else { return }
         
         NabtoManager.shared.createKeyPair(username: username) { (success, error) in
             print("create profile: \(success)")
             if success {
                 NabtoManager.shared.getFingerprint(username: username, completion: { (fingerprint, error) in
-                    print("fingerprint: \(fingerprint)")
                     if let fingerprint = fingerprint {
+                        print("fingerprint: \(fingerprint)")
                         ProfileTools.saveProfile(username: username, certificate: fingerprint)
                             self.openSessionForNewProfile(username: username)
                     } else {
@@ -76,8 +76,8 @@ class ProfileCreateViewController: UIViewController, UITextFieldDelegate {
     
     func getSimpleDeviceName() -> String {
         let okayChars : Set<Character> =
-            Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890+-*=(),.:!_".characters)
-        return String(UIDevice.current.name.characters.filter {okayChars.contains($0) })
+            Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890+-*=(),.:!_")
+        return String(UIDevice.current.name.filter {okayChars.contains($0) })
     }
     
     //MARK: - Textfield

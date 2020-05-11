@@ -101,7 +101,7 @@ class ACMEHeaterViewController: DeviceViewController, UIPickerViewDelegate, UIPi
     
     //MARK:- Device
     
-    func refresh() {
+    @objc func refresh() {
         busy = true
         let request = "heatpump_get_full_state.json"
         NabtoManager.shared.invokeRpc(device: device.id, request: request, parameters: nil) { (result, error) in
@@ -204,7 +204,7 @@ class ACMEHeaterViewController: DeviceViewController, UIPickerViewDelegate, UIPi
     
     //will be called after a small delay
     //if the app is still waiting response, will show the spinner
-    func showSpinner() {
+    @objc func showSpinner() {
         if busy {
             connectingView.isHidden = false
             spinner.startAnimating()
