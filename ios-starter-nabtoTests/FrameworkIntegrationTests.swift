@@ -30,7 +30,7 @@ class FrameworkIntegrationTests: XCTestCase {
             XCTAssert(success)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 20) { error in
+        waitForExpectations(timeout: 1) { error in
         }
     }
     
@@ -54,7 +54,7 @@ class FrameworkIntegrationTests: XCTestCase {
                 })
             }
         }
-        waitForExpectations(timeout: 20) { error in
+        waitForExpectations(timeout: 1) { error in
         }
     }
     
