@@ -22,10 +22,12 @@ class StoryboardHelper {
         var controller : DeviceViewController?
         
         //Add custom device screens here
-        if device.product == "ACME 9002 Heatpump" {
-            controller = storyboard.instantiateViewController(withIdentifier: "ACMEHeaterViewController") as! ACMEHeaterViewController
+        let demoProductType = "ACME 9002 Heatpump"
+        if device.product != demoProductType {
+            NSLog("Warning: Target device is of type \(device.product), this app only supports \(demoProductType)")
         }
-        
+        controller = storyboard.instantiateViewController(withIdentifier: "ACMEHeaterViewController") as! ACMEHeaterViewController
+
         controller?.device = device
         return controller
     }
