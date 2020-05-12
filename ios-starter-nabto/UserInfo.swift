@@ -55,7 +55,7 @@ class UserInfo {
     
     class func format(fingerprint: String) -> String {
         var result: [String] = []
-        let chars = Array(fingerprint.characters)
+        let chars = Array(fingerprint)
         for index in stride(from: 0, to: chars.count, by: 2) {
             result.append(String(chars[index..<min(index+2, chars.count)]))
         }
