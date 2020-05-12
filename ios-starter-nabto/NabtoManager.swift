@@ -67,7 +67,7 @@ class NabtoManager: Any {
     //MARK: - Startup / shutdown / session management
     
     func startup(completion:  @escaping (_ success : Bool, _ error : NabtoError?)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let status = self.nabto.nabtoStartup()
             switch status {
             case NABTO_OK:
@@ -84,7 +84,7 @@ class NabtoManager: Any {
     }
     
     func startupAndOpenGuestSession(completion: @escaping (_ success : Bool, _ error : NabtoError?)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let startStatus = self.nabto.nabtoStartup()
             switch startStatus {
             case NABTO_OK:
@@ -106,7 +106,7 @@ class NabtoManager: Any {
     }
     
     func openSessionForProfile(username: String?, completion: @escaping (_ success : Bool, _ error : NabtoError?)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let status = self.nabto.nabtoOpenSession(username, withPassword: self.pkPassword)
             if status == NABTO_OK {
                 let path = Bundle.main.url(forResource: "unabto_queries", withExtension: "xml")!
@@ -137,7 +137,7 @@ class NabtoManager: Any {
     }
     
     func shutdown(completion: @escaping (_ success : Bool, _ error : NabtoError?)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let status = self.nabto.nabtoShutdown()
             DispatchQueue.main.async {
                 if status == NABTO_OK {
@@ -188,7 +188,7 @@ class NabtoManager: Any {
     }
     
     func doCreateKeyPair(username: String, completion: @escaping (_ success : Bool, _ error : NabtoError?)->()){
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let status = self.nabto.nabtoCreateSelfSignedProfile(username, withPassword: self.pkPassword)
             switch status {
             case NABTO_OK:
@@ -204,7 +204,7 @@ class NabtoManager: Any {
     }
     
     func getFingerprint(username: String, completion:  @escaping (_ result : String?, _ error : NabtoError?)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             
             let string = self.getFingerprintInternal(username: username)
             DispatchQueue.main.async {
@@ -235,7 +235,7 @@ class NabtoManager: Any {
     //MARK: - Get device info - for discover and bookmarked items
     
     func discover(progress: @escaping (_ device : NabtoDevice)->(), failure: @escaping (_ error : NabtoError)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             if let list = self.nabto.nabtoGetLocalDevices() as? [String] {
                 print(list)
                 if list.count != 0 {
@@ -255,7 +255,7 @@ class NabtoManager: Any {
     
     func getDevicesInfo(bookmarks: [Bookmark], progress: @escaping (_ device : NabtoDevice)->(), failure: @escaping (_ error : NabtoError)->()) {
         let ids = bookmarks.map { $0.id }
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let list = self.nabto.nabtoGetLocalDevices()
             if  let list = list as? [String] {
                 print(list)
@@ -434,7 +434,7 @@ class NabtoManager: Any {
     //used to make requests to a device
     
     func invokeRpc(device: String, request: String, parameters: [String : Any]?, completion: @escaping (_ result : [String : Any]?, _ error : NabtoError?)->()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             var link = "nabto://\(device)/\(request)"
             if let parameters = parameters {
                 let string = self.buildParameterString(dictionary: parameters)
